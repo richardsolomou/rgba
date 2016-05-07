@@ -53,6 +53,16 @@
     $.each(colour.tints, function (tintId, tint) {
       // Calculate RGB values within limited range
       var tintValues = calculateTintValues(colour._id, tintId);
+
+      // Convert colour tint to hex
+      colour.tintsHex[tintId] = rgbToHex(tintValues[0], tintValues[1], tintValues[2]);
+
+      // Create and apply styling to colour tint element
+      var tintElement = createTintElement(colour._id, tintId);
+      tintElement.css('background-color', colour.tintsHex[tintId]);
+
+      // Render colour tint
+      tintElement.appendTo(tintsContainer);
     });
 
     // Render colour
@@ -110,6 +120,26 @@
     tintsElement.appendTo(colourElement);
 
     return colourElement;
+  }
+
+  /**
+   * Create the tint element.
+   * @param   {Number} colourId
+   * @param   {Number} tintId
+   * @returns {Object}
+   */
+  function createTintElement (colourId, tintId) {
+    // Set references
+    var colour = colours[colourId];
+    var tint = colour.tintsHex[tintId];
+
+    // Construct tint element
+    var tintElement = $('<div/>', {
+      class: 'tint tint_' + tintId,
+      text: tint
+    });
+
+    return tintElement;
   }
 
   /**
