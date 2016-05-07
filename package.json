@@ -1,0 +1,16 @@
+{
+  "name": "rgba",
+  "version": "1.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/richardsolomou/rgba.git"
+  },
+  "scripts": {
+    "start": "npm i && http-server --cors -c-1 --utc"
+  },
+  "dependencies": {
+    "http-server": "0.9.0",
+    "jquery": "2.2.3"
+  }
+}
