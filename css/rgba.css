@@ -7,14 +7,23 @@ body {
   margin: 0;
 }
 
-.colours {
+.colours,
+.tints {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.colour,
+.tint {
+  padding: 1em;
 }
 
 .colour {
-}
-
-.tints {
+  flex: 1 1 100%;
 }
 
 .tint {
+  flex: 1 1 0%;
 }
