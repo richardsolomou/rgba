@@ -41,6 +41,36 @@
   function renderColour (colour) {
     // Convert base colour to hex
     colour.baseColourHex = rgbToHex(colour.baseColour[0], colour.baseColour[1], colour.baseColour[2]);
+
+    // Create and apply styling to colour element
+    var colourElement = createColourElement(colour._id);
+    colourElement.css('background-color', colour.baseColourHex);
+  }
+
+  /**
+   * Create the colour element.
+   * @param   {Number} colourId
+   * @returns {Object}
+   */
+  function createColourElement (colourId) {
+    // Set references
+    var colour = colours[colourId];
+
+    // Construct colour element
+    var colourElement = $('<div/>', {
+      class: 'colour colour_' + colourId,
+      text: colour.name + ' ' + colour.baseColourHex
+    });
+
+    // Construct tints container element
+    var tintsElement = $('<div/>', {
+      class: 'tints'
+    });
+
+    // Append tints container to colour
+    tintsElement.appendTo(colourElement);
+
+    return colourElement;
   }
 
   /**
