@@ -6,7 +6,7 @@
   var colourContainer = $('.colours');
 
   // Fetch JSON
-  $.getJSON('https://qbs.arkonline.co.uk/task/colours.json?task=1', _init);
+  $.getJSON('https://qbs.arkonline.co.uk/task/colours.json?task=2', _init);
 
   /**
    * Initialise the application.
