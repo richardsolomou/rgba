@@ -6,13 +6,13 @@
   var colourContainer = $('.colours');
 
   // Fetch JSON
-  $.getJSON('https://qbs.arkonline.co.uk/task/colours.json?task=2', _init);
+  $.getJSON('https://qbs.arkonline.co.uk/task/colours.json?task=2', init);
 
   /**
    * Initialise the application.
    * @param {Array} data
    */
-  function _init (data) {
+  function init (data) {
     // Catch errors
     if (!(data instanceof Array) || !data.length) {
       console.error('Invalid data');
@@ -20,7 +20,7 @@
     }
 
     // Assign locally
-    console.info('Received data');
+    console.info('Received data', data);
     colours = data;
 
     // Loop through colours
@@ -40,7 +40,7 @@
    */
   function renderColour (colour) {
     // Convert base colour to hex
-    colour.baseColourHex = rgbToHex(colour.baseColour[0], colour.baseColour[1], colour.baseColour[2]);
+    colour.baseColourHex = rgba(colour.baseColour[0], colour.baseColour[1], colour.baseColour[2]);
 
     // Create and apply styling to colour element
     var colourElement = createColourElement(colour._id);
@@ -55,7 +55,7 @@
       var tintValues = calculateTintValues(colour._id, tintId);
 
       // Convert colour tint to hex
-      colour.tintsHex[tintId] = rgbToHex(tintValues[0], tintValues[1], tintValues[2]);
+      colour.tintsHex[tintId] = rgba(tintValues[0], tintValues[1], tintValues[2]);
 
       // Create and apply styling to colour tint element
       var tintElement = createTintElement(colour._id, tintId);
@@ -89,6 +89,7 @@
     $.each(tint, function (valueId, value) {
       // Sum of colour and tint RGB values
       var colourTint = colour.baseColour[valueId] + value;
+
       // Tint value limited to given range
       tintValues[valueId] = Math.max(min, Math.min(colourTint, max));
     });
@@ -147,19 +148,25 @@
    * @param   {Number} value
    * @returns {String}
    */
-  function valueToHex (value) {
-    var hex = value.toString(16);
-    return hex.length === 1 ? '0' + hex : hex;
+  function toHex (value) {
+    return ('0' + parseInt(value).toString(16)).slice(-2);
   }
 
   /**
-   * Convert rgb value to hex code.
+   * Convert rgb to hex or rgba.
    * @param   {Number} r
    * @param   {Number} g
    * @param   {Number} b
+   * @param   {Number} a
    * @returns {String}
    */
-  function rgbToHex (r, g, b) {
-    return '#' + valueToHex(r) + valueToHex(g) + valueToHex(b);
+  function rgba (r, g, b, a) {
+    if (typeof a !== 'undefined') {
+      // Return as rgba value
+      return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + a + ')';
+    }
+
+    // Return as hex
+    return '#' + toHex(r) + toHex(g) + toHex(b);
   }
 })();
