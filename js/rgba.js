@@ -45,6 +45,12 @@
     // Create and apply styling to colour element
     var colourElement = createColourElement(colour._id);
     colourElement.css('background-color', colour.baseColourHex);
+    colourElement.click(function (e) {
+      if (e.target !== this) {
+        return;
+      }
+      console.log('Event fired for click on colour');
+    });
 
     // Assign tints container
     var tintsContainer = colourElement.find('.tints');
@@ -60,6 +66,9 @@
       // Create and apply styling to colour tint element
       var tintElement = createTintElement(colour._id, tintId);
       tintElement.css('background-color', colour.tintsHex[tintId]);
+      tintElement.click(function () {
+        console.log('Event fired for click on tint');
+      });
 
       // Render colour tint
       tintElement.appendTo(tintsContainer);
@@ -107,18 +116,11 @@
     var colour = colours[colourId];
 
     // Construct colour element
-    var colourElement = $('<div/>', {
-      class: 'colour colour_' + colourId,
-      text: colour.name + ' ' + colour.baseColourHex
-    });
-
-    // Construct tints container element
-    var tintsElement = $('<div/>', {
-      class: 'tints'
-    });
-
-    // Append tints container to colour
-    tintsElement.appendTo(colourElement);
+    var colourElement = $('<div class="colour colour_' + colourId + '">' +
+                            colour.name +
+                            '<div class="tints"></div>' +
+                            colour.baseColourHex +
+                          '</div>');
 
     return colourElement;
   }
@@ -135,10 +137,7 @@
     var tint = colour.tintsHex[tintId];
 
     // Construct tint element
-    var tintElement = $('<div/>', {
-      class: 'tint tint_' + tintId,
-      text: tint
-    });
+    var tintElement = $('<div class="tint tint_' + tintId + '">' + tint + '</div>');
 
     return tintElement;
   }

@@ -17,8 +17,13 @@ body {
   justify-content: center;
 }
 
+.tints {
+  margin: 1em 0;
+}
+
 .colour,
 .tint {
+  padding: 1em 0;
   border-radius: 0;
   border: 3px solid transparent;
   margin: 1%;
@@ -33,13 +38,4 @@ body {
 .tint:hover {
   border-color: rgba(255, 255, 255, 0.5);
   cursor: pointer;
-}
-
-.colour-header,
-.colour-footer {
-  padding: 1em;
-}
-
-.colour-footer {
-  padding: 2em 1em 1em 1em;
 }
