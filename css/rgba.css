@@ -11,14 +11,35 @@ body {
 
 .colours,
 .tints {
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .colour,
 .tint {
-  border-radius: 1em;
-  flex: 1 1 auto;
+  border-radius: 0;
+  border: 3px solid transparent;
   margin: 1%;
+  transition: all 0.2s;
+}
+
+.tint {
   padding: 2em;
+}
+
+.colour:hover,
+.tint:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+}
+
+.colour-header,
+.colour-footer {
+  padding: 1em;
+}
+
+.colour-footer {
+  padding: 2em 1em 1em 1em;
 }
